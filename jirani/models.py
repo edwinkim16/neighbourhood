@@ -32,4 +32,11 @@ class Hood(models.Model):
     image = CloudinaryField('image')
     occupants = models.CharField(max_length=50)
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
-    created_on = models.DateTimeField(auto_now_add=True, null=True)            
+    created_on = models.DateTimeField(auto_now_add=True, null=True)  
+
+class Profile(models.Model):
+    profile_pic = CloudinaryField('image')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    bio = models.CharField(max_length = 255,null = True)
+    full_name = models.CharField(max_length=255, null=True)
+    hood = models.ForeignKey(Hood,null=True,on_delete=models.CASCADE)              
