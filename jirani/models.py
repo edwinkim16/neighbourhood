@@ -79,7 +79,7 @@ class Profile(models.Model):
     hood = models.ForeignKey(Hood,null=True,on_delete=models.CASCADE)   
 
     def __str__(self):
-        return self.user.username
+        return self.full_name
 
     def save_profile(self):
         self.save()
