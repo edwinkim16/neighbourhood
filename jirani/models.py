@@ -121,3 +121,11 @@ class Post(models.Model):
     description = models.TextField(max_length=300)
     hood = models.ForeignKey(Hood, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=65)
+
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def get_post(cls, id):
+        post = Post.objects.filter(hood__pk=id)
+        return post
