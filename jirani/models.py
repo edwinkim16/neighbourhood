@@ -91,6 +91,31 @@ class Business(models.Model):
     address = models.CharField(max_length=50)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.business_name
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_by_category(cls, category):
+        biz = cls.objects.filter(category__name__icontains=category)
+        return biz
+
+    @classmethod
+    def search_business(cls, search_term):
+        business = Business.objects.filter(business_name__icontains=search_term)
+        return business
+
+
+    @classmethod
+    def get_business(cls, id):
+        business = Business.objects.filter(hood__pk=id)
+        return business
+
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=300)
