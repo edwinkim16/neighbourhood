@@ -73,4 +73,22 @@ class BusinessTestClass(TestCase):
     def test_save_business(self):
         self.burgers.create_business()
         business =  Business.objects.all()
-        self.assertTrue(len(business)>0)                    
+        self.assertTrue(len(business)>0)       
+
+class PostTestClass(TestCase):
+    def setUp(self):
+        self.new_user = User(username="world", email="bs@gmail.com")
+        self.new_user.save()
+        self.my_hood = Hood(name='tao', location='survey', occupants=5)
+        self.my_hood.save()
+
+        self.new_post=Post(title = 'Programming',description = 'My first program')
+
+    def tearDown(self):
+        User.objects.all().delete()
+        Hood.objects.all().delete()
+        User.objects.all().delete()
+        Post.objects.all().delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_post,Post))                          
