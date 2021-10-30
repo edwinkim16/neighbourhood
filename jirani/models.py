@@ -47,3 +47,9 @@ class Business(models.Model):
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
     address = models.CharField(max_length=50)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
+
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField(max_length=300)
+    hood = models.ForeignKey(Hood, blank=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=65)
