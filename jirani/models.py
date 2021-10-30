@@ -39,4 +39,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.CharField(max_length = 255,null = True)
     full_name = models.CharField(max_length=255, null=True)
-    hood = models.ForeignKey(Hood,null=True,on_delete=models.CASCADE)              
+    hood = models.ForeignKey(Hood,null=True,on_delete=models.CASCADE)   
+
+class Business(models.Model):
+    business_name = models.CharField(max_length=50)
+    owner = models.ForeignKey(User,on_delete=models.CASCADE)
+    hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
+    address = models.CharField(max_length=50)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
