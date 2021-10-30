@@ -34,6 +34,43 @@ class Hood(models.Model):
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True, null=True)  
 
+    class Meta:
+        ordering = ['-pk']
+
+    def save_hood(self):
+        self.save()
+
+
+    def delete_hood(self):
+        self.delete()
+
+    def find_neighborhood(id): 
+     '''Method to find neighborhood object instance'''
+     neighborhood = Hood.objects.filter(id=id)
+     if neighborhood: 
+      return neighborhood
+    
+    def update_neighborhood(self,id): 
+     '''Method to update neighborhood object instance'''
+     neighborhood = Hood.objects.filter(id=id)
+     if neighborhood:
+      neighborhood.update(name=self.name,location=self.location) 
+    
+    def update_occupants(self,id): 
+     '''Method to update neighborhood object instance population'''
+     neighborhood = Hood.objects.filter(id=id)
+     if neighborhood: 
+      neighborhood.update(population = self.population)    
+
+    @classmethod
+    def search_hood(cls, search_term):
+        hood = Hood.objects.filter(name__icontains=search_term)
+        return hood
+
+
+    def __str__(self):
+        return self.name
+
 class Profile(models.Model):
     profile_pic = CloudinaryField('image')
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
