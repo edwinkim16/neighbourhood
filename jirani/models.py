@@ -78,6 +78,12 @@ class Profile(models.Model):
     full_name = models.CharField(max_length=255, null=True)
     hood = models.ForeignKey(Hood,null=True,on_delete=models.CASCADE)   
 
+    def __str__(self):
+        return self.user.username
+
+    def save_profile(self):
+        self.save()
+
 class Business(models.Model):
     business_name = models.CharField(max_length=50)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
