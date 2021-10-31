@@ -36,3 +36,16 @@ def profile(request, username):
     title = f'@{profile.username} '
 
     return render(request, 'profile.html', locals()) 
+
+def upload_hood(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = HoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+            hood.owner= current_user
+            upload.save()
+            return redirect('home')
+    else:
+        form = HoodForm()
+    return render(request, 'upload_hood.html', locals())

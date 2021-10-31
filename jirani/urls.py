@@ -8,6 +8,7 @@ urlpatterns=[
     url(r'^$', views.home, name='home'),
     url(r'^hood/(?P<hood_id>\d+)', views.hood, name='hood'),
     url(r'^profile/(?P<username>\w+)', views.profile, name='profile'),
+    url(r'^upload/', views.upload_hood, name='upload'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
