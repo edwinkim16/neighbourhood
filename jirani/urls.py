@@ -10,7 +10,8 @@ urlpatterns=[
     url(r'^profile/(?P<username>\w+)', views.profile, name='profile'),
     url(r'^upload/', views.upload_hood, name='upload'),
     url(r'^join(?P<hood_id>\d+)', views.join, name='join'),
-    url(r'^leave/(?P<hood_id>\d+)', views.leave, name='leave')
+    url(r'^leave/(?P<hood_id>\d+)', views.leave, name='leave'),
+    url(r'^search/', views.search_results, name='search_results'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
