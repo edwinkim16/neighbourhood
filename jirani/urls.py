@@ -13,6 +13,9 @@ urlpatterns=[
     url(r'^leave/(?P<hood_id>\d+)', views.leave, name='leave'),
     url(r'^search/', views.search_results, name='search_results'),
     url(r'^accounts/update/', views.edit, name='update_profile'),
+    url(r'^upload_business/', views.upload_business, name='upload_business'),
+    url(r'^search_biz/', views.search_category, name='search_category'),
+    url(r'^post/', views.add_post, name='post'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
