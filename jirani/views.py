@@ -44,7 +44,7 @@ def upload_hood(request):
         if form.is_valid():
             upload = form.save(commit=False)
             hood.owner= current_user
-            upload.save()
+            # upload.save()
             return redirect('home')
     else:
         form = HoodForm()

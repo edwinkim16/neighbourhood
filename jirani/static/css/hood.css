@@ -1,0 +1,14 @@
+ /* responsiveness */
+ @media (min-width: 768px) {
+    .top-navigation {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .top-navigation .search-form .search-field {
+      display: inline-block;
+      width: 80%;
+    }
+  }
