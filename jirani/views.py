@@ -44,7 +44,7 @@ def upload_hood(request):
         if form.is_valid():
             upload = form.save(commit=False)
             hood.owner= current_user
-            # upload.save()
+            upload.save()
             return redirect('home')
     else:
         form = HoodForm()
@@ -77,19 +77,22 @@ def search_results(request):
         
 def edit(request):
     current_user = request.user
-    user = Profile.objects.get(user=current_user)
+    #user = Profile.objects.get(user=current_user)
+    #user = User.objects.get(id=id)
     profile = User.objects.get(username=request.user)
 
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=user)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             edit = form.save(commit=False)
+            #edit.user_id=id
             edit.user = request.user
             edit.save()
             return redirect('profile.html')
     else:
-        form = ProfileForm(instance=user)
+        form = ProfileForm
+        message='profile updated go to home page'
     return render(request, 'edit_profile.html', locals())  
 
 def upload_business(request):

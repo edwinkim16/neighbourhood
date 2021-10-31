@@ -12,3 +12,14 @@
       width: 80%;
     }
   }
+
+  .card{
+    padding: 3%;
+    box-shadow: 3px 3px 2px greenyellow;
+}
+.card:hover{
+    padding: 5px;
+    box-shadow: 6px 5px 6px #2196F3;
+    cursor: pointer;
+    
+}  

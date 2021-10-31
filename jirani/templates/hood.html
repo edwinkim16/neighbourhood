@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="w3-display-container w3-animate-opacity ">
-    <img src="{{hood.image.cdn_url}} " alt="image"
+    <img src="{{hood.image.url}} " alt="image"
         style="width:100%;min-height:350px;max-height:400px;filter: brightness(40%);">
     <div class="w3-display-topmiddle w3-text-white w3-center w3-padding-top" style="margin-top:5%">
         <strong class="w3-xlarge"> {{ hood.name }}, </strong>
@@ -17,7 +17,7 @@
          font-weight: normal;text-decoration: inherit; width:200px;">
         </form>
 
-        <strong class="w3-xlarge">Administrator {{hood.owner}}</strong>
+        <strong class="w3-xlarge"> {{hood.owner}}</strong>
     </div>
 
     <div class="w3-display-bottomright">

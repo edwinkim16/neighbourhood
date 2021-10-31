@@ -2,38 +2,64 @@
 {% load static%}
 
 {% block content %}
-<style>
 
-    #home{
-        background:url('../static/images/ne.jpeg');
-        background-size:cover;
-        background-position:center;
-        height:100vh;
-        background-repeat:no-repeat;
-    }
-</style>
-<div class="w3-display-container" id="home">
+<div class="container">
 
-    <div class="w3-display-middle w3-center">
+    <div class="">
         <h3  style="font-weight: bold; color: blue;">Search for neighbourhoods</h3>
+        
         <form class="navbar-form " role="search" action="{% url 'search_results' %}">
             <input type="text" name="search" placeholder="&#xF002;  Search Hood" id="input"
                 class="w3-input "
                 style="font-family: FontAwesome; font-style: normal;  font-weight: normal; text-decoration: inherit; width:500px;">
         </form>
+        <h4>Update your profile <a href="{% url 'update_profile'%}" class="w3-bar-item w3-button" style="color: blue;">here
+            </a>to see your neighborhood authorities</h4>
         {% if request.user.profile.hood %}
         <small class="w3-text-white">
             <button class='btn' style="background-color: green">
-                <a href="{% url 'hood' hood_id=request.user.profile.hood.id %}" style="font-weight: bold;"> Locate your hood <br> to
-                see your authorities and health facilities </a>
+                <a href="{% url 'hood' hood_id=request.user.profile.hood.id %}" style="font-weight: bold;"> View authorities and health centres 
+                <br> in your area </a>
             </button>
         </small>
 
         {% else %}
-
+        {% endif %}
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="../static/images/n1.jpeg" alt="">
+                
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="min-height:300px;">
+                    <div class="card-block">
+                        
+                        <div class="mask flex-center rgba-black-strong">
+                            
+                            <h1>Welcome to Hoodwatch</h1>
+                            <p>This is a web application that <br> allows you to be in the loop <br>
+                                 about everything happening in your neighborhood.
+                                 <br> From contact information of authorities <br>
+                                  to meeting announcements or even alerts.</p>
+                        </div>
+                        
+                        <div class="card-text">
+                            
+                        </div>
+                        <br>
+                       
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
     </div>
+    
 </div>
-
+<br>
 <div class="w3-container">
     <div class="w3-row">
         <h2 class="w3-center"></h2>
@@ -42,13 +68,13 @@
             <div class="w3-card-4 w3-white" style="padding-bottom:5px;padding-top:3px;">
                 <div class="w3-container w3-margin">
                     <a href="{% url 'hood' hood_id=hood.id %}">
-                        <strong> {{ hood.name }}, </strong>
-                        <strong>{{hood.location}}</strong>
+                        <p style="font-weight: bold;"> Occupant: {{ hood.name }}</p>
+                        <p style="font-weight: bold;">Neighborhood: {{hood.location}}</p>
                     </a>
                 </div>
 
                 <header class="hovereffect" style="height:300px">
-                    <img src="{{ hood.image.cdn_url }}" class="img-responsive w3-image w3-center"
+                    <img src=" {{ hood.image.url }}" class="img-responsive w3-image w3-center"
                         style="min-height:100%; max-height:100%">
                 </header>
 
@@ -63,6 +89,8 @@
     </div>
 
 </div>
-{% endif %}
+
+
+
 
 {% endblock %}
