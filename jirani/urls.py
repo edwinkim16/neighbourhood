@@ -12,6 +12,7 @@ urlpatterns=[
     url(r'^join(?P<hood_id>\d+)', views.join, name='join'),
     url(r'^leave/(?P<hood_id>\d+)', views.leave, name='leave'),
     url(r'^search/', views.search_results, name='search_results'),
+    url(r'^accounts/update/', views.edit, name='update_profile'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
