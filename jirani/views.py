@@ -49,3 +49,16 @@ def upload_hood(request):
     else:
         form = HoodForm()
     return render(request, 'upload_hood.html', locals())
+
+def join(request,hood_id):
+    hood = Hood.objects.get(id=hood_id)
+    current_user = request.user
+    current_user.profile.hood = hood
+    current_user.profile.save()
+    return redirect('hood',hood_id)    
+
+def leave(request,hood_id):
+    current_user = request.user
+    current_user.profile.hood = None
+    current_user.profile.save()
+    return redirect('home')    
