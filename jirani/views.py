@@ -4,16 +4,19 @@ from . forms import *
 from .models import Hood, Profile, Business, Post,Location,Category
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def welcome(request):
     return render(request, 'welcome.html')
 
+@login_required(login_url='/accounts/login/')
 def home(request):
     hoods = Hood.objects.all()
     return render(request,'home.html',locals())    
 
+@login_required(login_url='/accounts/login/')
 def hood(request,hood_id):
     current_user = request.user
     hood_name = current_user.profile.hood
@@ -23,6 +26,7 @@ def hood(request,hood_id):
 
     return render(request,'hood.html',locals())    
 
+@login_required(login_url='/accounts/login/')
 def profile(request, username):
 
     profile = User.objects.get(username=username)
@@ -37,6 +41,7 @@ def profile(request, username):
 
     return render(request, 'profile.html', locals()) 
 
+@login_required(login_url='/accounts/login/')
 def upload_hood(request):
     current_user = request.user
     if request.method == 'POST':
@@ -50,6 +55,7 @@ def upload_hood(request):
         form = HoodForm()
     return render(request, 'upload_hood.html', locals())
 
+@login_required(login_url='/accounts/login/')
 def join(request,hood_id):
     hood = Hood.objects.get(id=hood_id)
     current_user = request.user
@@ -57,12 +63,14 @@ def join(request,hood_id):
     current_user.profile.save()
     return redirect('hood',hood_id)    
 
+@login_required(login_url='/accounts/login/')
 def leave(request,hood_id):
     current_user = request.user
     current_user.profile.hood = None
     current_user.profile.save()
     return redirect('home')    
 
+@login_required(login_url='/accounts/login/')
 def search_results(request):
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search')
@@ -74,7 +82,8 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request,'search_hood.html',{"message":message})
-        
+
+@login_required(login_url='/accounts/login/')        
 def edit(request):
     current_user = request.user
     #user = Profile.objects.get(user=current_user)
@@ -95,6 +104,7 @@ def edit(request):
         message='profile updated go to home page'
     return render(request, 'edit_profile.html', locals())  
 
+@login_required(login_url='/accounts/login/')
 def upload_business(request):
     hood = Hood.objects.get(id=request.user.profile.hood.id)
     if request.method == 'POST':
@@ -109,6 +119,7 @@ def upload_business(request):
         businessform = BusinessForm()
     return render(request,'business.html',locals())     
 
+@login_required(login_url='/accounts/login/')
 def search_category(request):
     location = Location.objects.all()
     category = Category.objects.all()
@@ -123,6 +134,7 @@ def search_category(request):
         message = "You haven't searched for anything"
         return render(request,'search_business.html',{"message":message})      
 
+@login_required(login_url='/accounts/login/')
 def add_post(request):
     hood = Hood.objects.get(id=request.user.profile.hood.id)
     if request.method == 'POST':
